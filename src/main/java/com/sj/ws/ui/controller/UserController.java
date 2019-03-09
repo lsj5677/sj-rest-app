@@ -69,6 +69,7 @@ public class UserController {
 		
 	}
 
+	//delete method
 	@DeleteMapping (
 		path = "/{id}"
 	)
