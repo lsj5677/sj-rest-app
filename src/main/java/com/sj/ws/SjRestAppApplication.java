@@ -2,13 +2,20 @@ package com.sj.ws;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.sj.ws.security.AppProperties;
 
 @SpringBootApplication
-public class SjRestAppApplication {
+public class SjRestAppApplication extends SpringBootServletInitializer {
+	
+	@Override
+	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+		return application.sources(SjRestAppApplication.class);
+	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(SjRestAppApplication.class, args);

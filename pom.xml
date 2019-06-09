@@ -11,6 +11,7 @@
 	</parent>
 	<groupId>com.sj.ws</groupId>
 	<artifactId>sj-rest-app</artifactId>
+	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>sj-rest-app</name>
 	<description></description>
@@ -55,6 +56,12 @@
 			<groupId>com.amazonaws</groupId>
 			<artifactId>aws-java-sdk-ses</artifactId>
 			<version>1.11.475</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
 		</dependency>
 
 		<dependency>

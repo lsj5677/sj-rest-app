@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sj.ws.service.UserService;
 import com.sj.ws.shared.dto.UserDto;
+import com.sj.ws.ui.model.request.PasswordResetModel;
 import com.sj.ws.ui.model.request.PasswordResetRequestModel;
 import com.sj.ws.ui.model.request.UserDetailsRequestModel;
 import com.sj.ws.ui.model.response.OperationStatusModel;
@@ -105,7 +106,7 @@ public class UserController {
 	}
 
 	/*
-	 * http://localhost:8080/users/email-verification?token=sdfsdf
+	 * http://localhost:8080/users/email-verification?token.=sdfsdf
 	 */
 	@GetMapping(path = "/email-verification", produces = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_XML_VALUE })
@@ -147,5 +148,25 @@ public class UserController {
        
        return returnValue;
    }
-	
+
+   @PostMapping(path = "/password-reset",
+           consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
+   )
+   public OperationStatusModel resetPassword(@RequestBody PasswordResetModel passwordResetModel) {
+   	OperationStatusModel returnValue = new OperationStatusModel();
+
+       boolean operationResult = userService.resetPassword(
+               passwordResetModel.getToken(),
+               passwordResetModel.getPassword());
+       
+       returnValue.setOperationName(RequestOperationName.PASSWORD_RESET.name());
+       returnValue.setOperationResult(RequestOperationStatus.ERROR.name());
+
+       if(operationResult)
+       {
+           returnValue.setOperationResult(RequestOperationStatus.SUCCESS.name());
+       }
+
+       return returnValue;
+   }
 }
